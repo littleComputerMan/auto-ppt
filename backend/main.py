@@ -463,10 +463,12 @@ async def import_from_pptx(file_data: Dict[str, Any], db = Depends(get_db)):
 
 if __name__ == "__main__":
     # Development server
+    import os
+    port = int(os.getenv("BACKEND_PORT", 8001))
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8000,
-        reload=True,
+        port=port,
+        reload=False,  # Disable reload in Docker
         log_level="info"
     )
